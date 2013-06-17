@@ -90,7 +90,7 @@
 		<delete dir="${mcpsrc.dir}/${src.dir}" />
 	</target>
 
-	<target name="build" depends="setup-forge" unless="already-compiled">
+	<target name="build" depends="get-version" unless="already-compiled">
 		<!-- Recompile -->
 		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">
 			<arg line="/c recompile.bat"/>
