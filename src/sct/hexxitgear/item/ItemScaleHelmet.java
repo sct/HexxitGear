@@ -17,7 +17,7 @@ public class ItemScaleHelmet extends ItemArmor {
     public ItemScaleHelmet(int id) {
         super(id, EnumArmorMaterial.DIAMOND, 3, 0);
         setCreativeTab(CreativeTabs.tabMisc);
-        setUnlocalizedName("hexxitgear.scalehelmet");
+        setUnlocalizedName("hexxitgear.scale.helmet");
     }
 
     @Override

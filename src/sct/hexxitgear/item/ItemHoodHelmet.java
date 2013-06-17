@@ -17,7 +17,7 @@ public class ItemHoodHelmet extends ItemArmor {
     public ItemHoodHelmet(int id) {
         super(id, EnumArmorMaterial.DIAMOND, 3, 0);
         setCreativeTab(CreativeTabs.tabMisc);
-        setUnlocalizedName("hexxitgear.hoodhelmet");
+        setUnlocalizedName("hexxitgear.thief.helmet");
     }
 
     @Override

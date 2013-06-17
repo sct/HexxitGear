@@ -17,7 +17,7 @@ public class ItemSkullHelmet extends ItemArmor {
     public ItemSkullHelmet(int id) {
         super(id, EnumArmorMaterial.DIAMOND, 3, 0);
         setCreativeTab(CreativeTabs.tabMisc);
-        setUnlocalizedName("hexxitgear.skullhelmet");
+        setUnlocalizedName("hexxitgear.tribal.helmet");
     }
 
     @Override

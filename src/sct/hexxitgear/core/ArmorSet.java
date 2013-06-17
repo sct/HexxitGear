@@ -2,14 +2,18 @@ package sct.hexxitgear.core;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import sct.hexxitgear.HexxitGear;
 
 import java.util.*;
 
 public class ArmorSet {
 
-    public static ArmorSet tribalSet = new ArmorSet("Tribal", "https://dl.dropbox.com/u/57416963/Minecraft/Capes/kinglemmingcofh.png", Arrays.asList(HexxitGear.skullHelmet, HexxitGear.tribalChest, HexxitGear.tribalLeggings, HexxitGear.tribalShoes));
+    public static ArmorSet tribalSet = new ArmorSet("Tribal", "http://dpf.sctgaming.com/capes/brownrags.png",
+            Arrays.asList(HexxitGear.skullHelmet, HexxitGear.tribalChest, HexxitGear.tribalLeggings, HexxitGear.tribalShoes));
+    public static ArmorSet thiefSet = new ArmorSet("Thief", "http://dpf.sctgaming.com/capes/redcape.png",
+            Arrays.asList(HexxitGear.hoodHelmet, HexxitGear.thiefChest, HexxitGear.thiefLeggings, HexxitGear.thiefBoots));
+    public static ArmorSet scaleSet = new ArmorSet("Scale", "http://dpf.sctgaming.com/capes/purplecape.png",
+            Arrays.asList(HexxitGear.scaleHelmet, HexxitGear.scaleChest, HexxitGear.scaleLeggings, HexxitGear.scaleBoots));
 
     private static List<ArmorSet>armorSets;
     private static Map<String, ArmorSet> playerMap = new HashMap<String, ArmorSet>();
@@ -75,7 +79,7 @@ public class ArmorSet {
     }
 
     public static void removePlayerArmorSet(String playerName) {
-        if (getPlayerArmorSet(playerName).getCapeUrl() != null) {
+        if (getPlayerArmorSet(playerName) != null && getPlayerArmorSet(playerName).getCapeUrl() != null) {
             CapeHandler.removeCape(playerName);
         }
         playerMap.remove(playerName);
