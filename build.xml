@@ -116,6 +116,10 @@
 		<copy todir="${classes.dir}">
 			<fileset dir="${resources.dir}" />
 		</copy>
+
+        <!-- Copy mcmod.info -->
+        <copy file="mcmod.info" todir="${classes.dir}"/>
+        <copy file="hexxitgear.png" todir="${classes.dir}"/>
 	</target>
 
 	<target name="build-number-there" if="env.BUILD_NUMBER" >

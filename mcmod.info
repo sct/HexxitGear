@@ -1,21 +1,21 @@
+[
 {
-    "modinfoversion": 2,
-    "modlist": [
-        {
-            "modid": "hexxitgear",
-            "name": "Hexxit Gear",
-            "description": "Rad awesome armor",
-            "version": "1.0",
-            "mcversion": "1.5.2",
-            "url": "",
-            "updateUrl": "",
-            "authors": [
-                "sct"
-            ],
-            "credits": "By just sct",
-            "requiredMods": [
-                "Forge"
-            ]
-        }
+    "modid": "hexxitgear",
+    "name": "Hexxit Gear",
+    "description": "Special gear designed to work in conjuction with the Hexxit modpack.",
+    "mcversion": "1.5.1",
+    "version": "1.0",
+    "url": "https://github.com/sct/HexxitGear",
+    "updateUrl": "",
+    "authors": [
+        "sct"
+    ],
+    "credits": "By sct. Artwork by Cheapshot.",
+    "logoFile": "/hexxitgear.png",
+    "screenshots": [
+    ],
+    "parent":"",
+    "dependencies": [
     ]
 }
+]

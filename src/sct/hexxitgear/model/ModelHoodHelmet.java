@@ -68,13 +68,14 @@ public class ModelHoodHelmet extends ModelBiped {
 
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        float scaledUp = f5 + 0.005F;
+        float scaledUp = f5 + 0.009F;
+        float suLarge = f5 + 0.002F;
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         head.render(scaledUp);
-        Shape1.render(f5);
-        Shape2.render(f5);
-        Shape3.render(f5);
-        Shape4.render(f5);
+        Shape1.render(suLarge);
+        Shape2.render(suLarge);
+        Shape3.render(suLarge);
+        Shape4.render(suLarge);
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z) {

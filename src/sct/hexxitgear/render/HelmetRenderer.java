@@ -24,11 +24,11 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import sct.hexxitgear.item.ItemSkullHelmet;
-import sct.hexxitgear.model.SkullHelmet;
+import sct.hexxitgear.model.ModelSkullHelmet;
 
 public class HelmetRenderer implements IItemRenderer {
 
-    private static final SkullHelmet SKULL_HELMET = new SkullHelmet();
+    private static final ModelSkullHelmet SKULL_HELMET = new ModelSkullHelmet();
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {

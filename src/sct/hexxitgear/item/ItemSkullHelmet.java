@@ -26,11 +26,11 @@ import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import sct.hexxitgear.gui.HGCreativeTab;
-import sct.hexxitgear.model.SkullHelmet;
+import sct.hexxitgear.model.ModelSkullHelmet;
 
 public class ItemSkullHelmet extends ItemArmor {
 
-    public static final SkullHelmet modelHelmet = new SkullHelmet();
+    public static final ModelSkullHelmet modelHelmet = new ModelSkullHelmet();
 
     public ItemSkullHelmet(int id) {
         super(id, EnumArmorMaterial.DIAMOND, 3, 0);

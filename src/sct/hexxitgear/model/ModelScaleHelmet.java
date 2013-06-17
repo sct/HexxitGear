@@ -38,8 +38,6 @@ public class ModelScaleHelmet extends ModelBiped {
     ModelRenderer Shape11;
 
     public ModelScaleHelmet() {
-        textureWidth = 64;
-        textureHeight = 32;
 
         textureWidth = 64;
         textureHeight = 64;
@@ -120,20 +118,21 @@ public class ModelScaleHelmet extends ModelBiped {
 
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        float scaledUp = f5 + 0.005F;
+        float scaledUp = f5 + 0.009F;
+        float suLarge = f5 + 0.002F;
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         head.render(scaledUp);
-        Shape1.render(f5);
-        Shape2.render(f5);
-        Shape3.render(f5);
-        Shape4.render(f5);
-        Shape5.render(f5);
-        Shape6.render(f5);
-        Shape7.render(f5);
-        Shape8.render(f5);
-        Shape9.render(f5);
-        Shape10.render(f5);
-        Shape11.render(f5);
+        Shape1.render(suLarge);
+        Shape2.render(suLarge);
+        Shape3.render(suLarge);
+        Shape4.render(suLarge);
+        Shape5.render(suLarge);
+        Shape6.render(suLarge);
+        Shape7.render(suLarge);
+        Shape8.render(suLarge);
+        Shape9.render(suLarge);
+        Shape10.render(suLarge);
+        Shape11.render(suLarge);
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z) {

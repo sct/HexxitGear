@@ -22,7 +22,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class SkullHelmet extends ModelBiped {
+public class ModelSkullHelmet extends ModelBiped {
 
     //fields
     ModelRenderer head;
@@ -31,7 +31,7 @@ public class SkullHelmet extends ModelBiped {
     ModelRenderer Shape2;
     ModelRenderer Shape3;
 
-    public SkullHelmet() {
+    public ModelSkullHelmet() {
         textureWidth = 64;
         textureHeight = 32;
 
