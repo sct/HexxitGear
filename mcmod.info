@@ -1,0 +1,21 @@
+{
+    "modinfoversion": 2,
+    "modlist": [
+        {
+            "modid": "hexxitgear",
+            "name": "Hexxit Gear",
+            "description": "Rad awesome armor",
+            "version": "1.0",
+            "mcversion": "1.5.2",
+            "url": "",
+            "updateUrl": "",
+            "authors": [
+                "sct"
+            ],
+            "credits": "By just sct",
+            "requiredMods": [
+                "Forge"
+            ]
+        }
+    ]
+}
