@@ -16,28 +16,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package sct.hexxitgear;
+package sct.hexxitgear.item;
 
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
-import net.minecraft.entity.player.EntityPlayer;
-import sct.hexxitgear.core.HGTickHandler;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.item.Item;
+import sct.hexxitgear.gui.HGCreativeTab;
 
-public class CommonProxy {
+public class ItemHexicalEssence extends Item {
 
-    public void init () {
-        registerHandlers();
+    public ItemHexicalEssence(int id) {
+        super(id);
+        setCreativeTab(HGCreativeTab.tab);
+        setUnlocalizedName("hexxitgear.hexicalessence");
     }
 
-    public int addArmor(String armorName) {
-        return 0;
-    }
-
-    public EntityPlayer findPlayer(String playerName) {
-        return null;
-    }
-
-    public void registerHandlers() {
-        TickRegistry.registerTickHandler(new HGTickHandler(), Side.SERVER);
+    @Override
+    public void registerIcons(IconRegister ir) {
+        itemIcon = ir.registerIcon(getUnlocalizedName());
     }
 }

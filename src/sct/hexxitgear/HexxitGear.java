@@ -30,12 +30,15 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import sct.hexxitgear.block.BlockHexbiscus;
 import sct.hexxitgear.core.HGPlayerTracker;
 import sct.hexxitgear.core.HGTickHandler;
 import sct.hexxitgear.item.*;
 import sct.hexxitgear.net.ClientPacketHandler;
 import sct.hexxitgear.setup.HexxitGearConfig;
+import sct.hexxitgear.world.HGWorldGen;
 
 import java.util.logging.Logger;
 
@@ -55,6 +58,11 @@ public class HexxitGear {
     public static CommonProxy proxy;
 
     public static Logger logger;
+
+    public static Block hexbiscus;
+
+    public static Item hexicalEssence;
+    public static Item hexicalDiamond;
 
     public static Item skullHelmet;
     public static Item tribalChest;
@@ -85,6 +93,8 @@ public class HexxitGear {
 
     @Init
     public void init(FMLInitializationEvent evt) {
+        hexbiscus = new BlockHexbiscus(HexxitGearConfig.hexbiscus.getInt());
+
         skullHelmet = new ItemSkullHelmet(HexxitGearConfig.tribalHelmetId.getInt());
         tribalChest = new ItemTribalArmor(HexxitGearConfig.tribalChestId.getInt(), proxy.addArmor("tribal"), 1).setUnlocalizedName("hexxitgear.tribal.chest");
         tribalLeggings = new ItemTribalArmor(HexxitGearConfig.tribalLeggingsId.getInt(), proxy.addArmor("tribal"), 2).setUnlocalizedName("hexxitgear.tribal.leggings");
@@ -98,12 +108,18 @@ public class HexxitGear {
         thiefLeggings = new ItemThiefArmor(HexxitGearConfig.thiefLeggingsId.getInt(), proxy.addArmor("thief"), 2).setUnlocalizedName("hexxitgear.thief.leggings");
         thiefBoots = new ItemThiefArmor(HexxitGearConfig.thiefBootsId.getInt(), proxy.addArmor("thief"), 3).setUnlocalizedName("hexxitgear.thief.boots");
 
+        hexicalEssence = new ItemHexicalEssence(HexxitGearConfig.hexicalEssence.getInt());
+        hexicalDiamond = new ItemHexicalDiamond(HexxitGearConfig.hexicalDiamond.getInt());
+
+        GameRegistry.registerBlock(hexbiscus, hexbiscus.getUnlocalizedName());
+
+        GameRegistry.registerWorldGenerator(new HGWorldGen());
+
         proxy.init();
     }
 
     @PostInit
     public void postInit(FMLPostInitializationEvent evt) {
-        TickRegistry.registerTickHandler(new HGTickHandler(), Side.SERVER);
         GameRegistry.registerPlayerTracker(HGPlayerTracker.instance);
     }
 }

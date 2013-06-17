@@ -21,17 +21,19 @@ package sct.hexxitgear.core;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import sct.hexxitgear.HexxitGear;
+import sct.hexxitgear.core.buff.BuffTribalSet;
+import sct.hexxitgear.core.buff.IBuffHandler;
 
 import java.util.*;
 
 public class ArmorSet {
 
     public static ArmorSet tribalSet = new ArmorSet("Tribal", "http://dpf.sctgaming.com/capes/brownrags.png",
-            Arrays.asList(HexxitGear.skullHelmet, HexxitGear.tribalChest, HexxitGear.tribalLeggings, HexxitGear.tribalShoes));
+            Arrays.asList(HexxitGear.skullHelmet, HexxitGear.tribalChest, HexxitGear.tribalLeggings, HexxitGear.tribalShoes), new BuffTribalSet());
     public static ArmorSet thiefSet = new ArmorSet("Thief", "http://dpf.sctgaming.com/capes/redcape.png",
-            Arrays.asList(HexxitGear.hoodHelmet, HexxitGear.thiefChest, HexxitGear.thiefLeggings, HexxitGear.thiefBoots));
+            Arrays.asList(HexxitGear.hoodHelmet, HexxitGear.thiefChest, HexxitGear.thiefLeggings, HexxitGear.thiefBoots), new BuffTribalSet());
     public static ArmorSet scaleSet = new ArmorSet("Scale", "http://dpf.sctgaming.com/capes/purplecape.png",
-            Arrays.asList(HexxitGear.scaleHelmet, HexxitGear.scaleChest, HexxitGear.scaleLeggings, HexxitGear.scaleBoots));
+            Arrays.asList(HexxitGear.scaleHelmet, HexxitGear.scaleChest, HexxitGear.scaleLeggings, HexxitGear.scaleBoots), new BuffTribalSet());
 
     private static List<ArmorSet>armorSets;
     private static Map<String, ArmorSet> playerMap = new HashMap<String, ArmorSet>();
@@ -39,6 +41,7 @@ public class ArmorSet {
     private List<Item> armors = new ArrayList<Item>();
     private String capeUrl;
     private String name;
+    private IBuffHandler buffHandler;
 
     public static List<ArmorSet> getArmorSets() {
         return armorSets;
@@ -63,6 +66,7 @@ public class ArmorSet {
             if (matched == 4) {
                 if (getPlayerArmorSet(player.username) == null || !getPlayerArmorSet(player.username).equals(armorSet)) {
                     addPlayerArmorSet(player.username, armorSet);
+                    player.sendChatToPlayer("Set complete: " + armorSet.getName());
                 }
                 foundMatch = true;
             }
@@ -103,18 +107,19 @@ public class ArmorSet {
         playerMap.remove(playerName);
     }
 
-    public ArmorSet(String name, String capeUrl, List<Item>armor) {
+    public ArmorSet(String name, String capeUrl, List<Item>armor, IBuffHandler buffHandler) {
         this.name = name;
         this.armors = armor;
         this.capeUrl = capeUrl;
+        this.buffHandler = buffHandler;
 
         if (armorSets == null) armorSets = new ArrayList<ArmorSet>();
 
         armorSets.add(this);
     }
 
-    public ArmorSet(String name, List<Item>armor) {
-        this(name, null, armor);
+    public ArmorSet(String name, List<Item>armor, IBuffHandler buffHandler) {
+        this(name, null, armor, buffHandler);
     }
 
     public String getName() {
@@ -127,5 +132,9 @@ public class ArmorSet {
 
     public String getCapeUrl() {
         return capeUrl;
+    }
+
+    public void applyBuffs(EntityPlayer player) {
+        buffHandler.applyPlayerBuffs(player);
     }
 }

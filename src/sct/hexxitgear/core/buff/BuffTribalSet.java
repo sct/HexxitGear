@@ -16,28 +16,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package sct.hexxitgear;
+package sct.hexxitgear.core.buff;
 
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
-import sct.hexxitgear.core.HGTickHandler;
 
-public class CommonProxy {
+public class BuffTribalSet implements IBuffHandler {
 
-    public void init () {
-        registerHandlers();
-    }
-
-    public int addArmor(String armorName) {
-        return 0;
-    }
-
-    public EntityPlayer findPlayer(String playerName) {
-        return null;
-    }
-
-    public void registerHandlers() {
-        TickRegistry.registerTickHandler(new HGTickHandler(), Side.SERVER);
+    @Override
+    public void applyPlayerBuffs(EntityPlayer player) {
+        player.landMovementFactor = 0.2F;
+        player.jumpMovementFactor = player.landMovementFactor * 0.5F;
     }
 }

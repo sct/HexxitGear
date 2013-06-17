@@ -20,13 +20,12 @@ package sct.hexxitgear;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
+import sct.hexxitgear.core.HGTickHandler;
 
 public class ClientProxy extends CommonProxy {
-
-    @Override
-    public void init() {
-    }
 
     @Override
     public int addArmor(String armorName) {
@@ -42,5 +41,10 @@ public class ClientProxy extends CommonProxy {
             }
         }
         return null;
+    }
+
+    @Override
+    public void registerHandlers() {
+        TickRegistry.registerTickHandler(new HGTickHandler(), Side.CLIENT);
     }
 }

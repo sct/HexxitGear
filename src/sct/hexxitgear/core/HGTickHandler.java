@@ -33,12 +33,16 @@ public class HGTickHandler implements ITickHandler {
         if (type.equals(EnumSet.of(TickType.PLAYER))) {
             for (Object tick : tickData) {
                 if (tick instanceof EntityPlayer) {
+                    EntityPlayer player = (EntityPlayer) tick;
                     if (tickCounter > 20) {
-                        EntityPlayer player = (EntityPlayer) tick;
                         ArmorSet.getMatchingSet(player);
                         tickCounter = 0;
                     }
                     tickCounter++;
+                    if (ArmorSet.getPlayerArmorSet(player.username) != null) {
+                        ArmorSet armorSet = ArmorSet.getPlayerArmorSet(player.username);
+                        armorSet.applyBuffs(player);
+                    }
                 }
             }
         }
