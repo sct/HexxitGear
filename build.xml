@@ -72,7 +72,7 @@
 		<delete dir="${mcpsrc.dir}/${src.dir}" />
 	</target>
 
-	<target name="build" depends="extract-dependencies" unless="already-compiled">
+	<target name="build" unless="already-compiled">
 		<!-- Recompile -->
 		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">
 			<arg line="/c recompile.bat"/>
