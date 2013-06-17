@@ -20,12 +20,12 @@ package sct.hexxitgear.item;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import sct.hexxitgear.gui.HGCreativeTab;
 import sct.hexxitgear.model.SkullHelmet;
 
 public class ItemSkullHelmet extends ItemArmor {
@@ -34,7 +34,7 @@ public class ItemSkullHelmet extends ItemArmor {
 
     public ItemSkullHelmet(int id) {
         super(id, EnumArmorMaterial.DIAMOND, 3, 0);
-        setCreativeTab(CreativeTabs.tabMisc);
+        setCreativeTab(HGCreativeTab.tab);
         setUnlocalizedName("hexxitgear.tribal.helmet");
     }
 
