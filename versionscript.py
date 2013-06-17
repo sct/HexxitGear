@@ -14,7 +14,7 @@ mcmod = open('mcmod.info', 'r')
 
 data = json.load(mcmod)
 
-for mod in data['modlist']:
+for mod in data:
     for attribute, value in mod.iteritems():
         if (attribute == 'version'):
             mod[attribute] = modversion
