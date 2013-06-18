@@ -26,13 +26,8 @@ public class BuffScaleSet implements IBuffHandler {
 
     @Override
     public void applyPlayerBuffs(EntityPlayer player) {
-        if (!player.isPotionActive(Potion.damageBoost))
-            player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 0, 0));
-
-        if (!player.isPotionActive(Potion.fireResistance))
-            player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 0, 0));
-
-        if (player.isPotionActive(Potion.resistance))
-            player.addPotionEffect(new PotionEffect(Potion.resistance.id, 0, 0));
+        player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20, 0));
+        player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 20, 1));
+        player.addPotionEffect(new PotionEffect(Potion.resistance.id, 20, 0));
     }
 }

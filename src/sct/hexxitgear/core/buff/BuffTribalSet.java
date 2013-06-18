@@ -26,8 +26,8 @@ public class BuffTribalSet implements IBuffHandler {
 
     @Override
     public void applyPlayerBuffs(EntityPlayer player) {
-        player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 2 * 20, 0));
-        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 2 * 20, 0));
-        player.addPotionEffect(new PotionEffect(Potion.jump.id, 2 * 20, 0));
+        player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20, 0));
+        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 20, 0));
+        player.addPotionEffect(new PotionEffect(Potion.jump.id, 2 * 20, 2));
     }
 }
