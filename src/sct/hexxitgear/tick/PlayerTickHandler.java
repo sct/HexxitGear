@@ -40,6 +40,7 @@ public class PlayerTickHandler implements ITickHandler {
                         tickCounter = 0;
                     }
                     tickCounter++;
+
                     if (ArmorSet.getPlayerArmorSet(player.username) != null) {
                         ArmorSet armorSet = ArmorSet.getPlayerArmorSet(player.username);
                         armorSet.applyBuffs(player);

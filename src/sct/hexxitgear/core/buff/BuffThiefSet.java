@@ -22,12 +22,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
-public class BuffTribalSet implements IBuffHandler {
+public class BuffThiefSet implements IBuffHandler {
 
     @Override
     public void applyPlayerBuffs(EntityPlayer player) {
-        player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 2 * 20, 0));
-        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 2 * 20, 0));
-        player.addPotionEffect(new PotionEffect(Potion.jump.id, 2 * 20, 0));
+        player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 1, 0));
+        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 1, 0));
+        player.landMovementFactor = 0.2F;
+        player.jumpMovementFactor = player.landMovementFactor * 0.5F;
     }
 }

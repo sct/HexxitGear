@@ -21,6 +21,8 @@ package sct.hexxitgear.core;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import sct.hexxitgear.HexxitGear;
+import sct.hexxitgear.core.buff.BuffScaleSet;
+import sct.hexxitgear.core.buff.BuffThiefSet;
 import sct.hexxitgear.core.buff.BuffTribalSet;
 import sct.hexxitgear.core.buff.IBuffHandler;
 
@@ -31,9 +33,9 @@ public class ArmorSet {
     public static ArmorSet tribalSet = new ArmorSet("Tribal", "http://dpf.sctgaming.com/capes/brownrags.png",
             Arrays.asList(HexxitGear.tribalHelmet, HexxitGear.tribalChest, HexxitGear.tribalLeggings, HexxitGear.tribalShoes), new BuffTribalSet());
     public static ArmorSet thiefSet = new ArmorSet("Thief", "http://dpf.sctgaming.com/capes/redcape.png",
-            Arrays.asList(HexxitGear.thiefHelmet, HexxitGear.thiefChest, HexxitGear.thiefLeggings, HexxitGear.thiefBoots), new BuffTribalSet());
+            Arrays.asList(HexxitGear.thiefHelmet, HexxitGear.thiefChest, HexxitGear.thiefLeggings, HexxitGear.thiefBoots), new BuffThiefSet());
     public static ArmorSet scaleSet = new ArmorSet("Scale", "http://dpf.sctgaming.com/capes/purplecape.png",
-            Arrays.asList(HexxitGear.scaleHelmet, HexxitGear.scaleChest, HexxitGear.scaleLeggings, HexxitGear.scaleBoots), new BuffTribalSet());
+            Arrays.asList(HexxitGear.scaleHelmet, HexxitGear.scaleChest, HexxitGear.scaleLeggings, HexxitGear.scaleBoots), new BuffScaleSet());
 
     private static List<ArmorSet>armorSets;
     private static Map<String, ArmorSet> playerMap = new HashMap<String, ArmorSet>();
