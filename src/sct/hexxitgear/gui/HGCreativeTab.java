@@ -34,7 +34,7 @@ public class HGCreativeTab extends CreativeTabs {
 
     @Override
     public ItemStack getIconItemStack() {
-        return new ItemStack(HexxitGear.skullHelmet, 1, 0);
+        return new ItemStack(HexxitGear.tribalHelmet, 1, 0);
     }
 
     @Override

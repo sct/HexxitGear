@@ -16,15 +16,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package sct.hexxitgear.core;
+package sct.hexxitgear.tick;
 
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 import net.minecraft.entity.player.EntityPlayer;
+import sct.hexxitgear.core.ArmorSet;
 
 import java.util.EnumSet;
 
-public class HGTickHandler implements ITickHandler {
+public class PlayerTickHandler implements ITickHandler {
 
     private int tickCounter = 0;
 

@@ -20,7 +20,10 @@ package sct.hexxitgear.block;
 
 import net.minecraft.block.BlockFlower;
 import net.minecraft.client.renderer.texture.IconRegister;
+import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.gui.HGCreativeTab;
+
+import java.util.Random;
 
 public class BlockHexbiscus extends BlockFlower {
 
@@ -33,5 +36,10 @@ public class BlockHexbiscus extends BlockFlower {
     @Override
     public void registerIcons(IconRegister ir) {
         blockIcon = ir.registerIcon(getUnlocalizedName());
+    }
+
+    @Override
+    public int idDropped(int par1, Random par2Random, int par3) {
+        return HexxitGear.hexicalEssence.itemID;
     }
 }

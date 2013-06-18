@@ -30,6 +30,13 @@ public class HGWorldGen implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+
+        if (HexxitGear.getDimBlacklist().contains(world.provider.dimensionId))
+            return;
+
+        if (world.getWorldInfo().getTerrainType().getWorldTypeName().equals("flat"))
+            return;
+
         int xMin = chunkX << 4;
         int zMin = chunkZ << 4;
 

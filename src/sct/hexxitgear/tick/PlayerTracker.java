@@ -16,14 +16,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package sct.hexxitgear.core;
+package sct.hexxitgear.tick;
 
 import cpw.mods.fml.common.IPlayerTracker;
 import net.minecraft.entity.player.EntityPlayer;
+import sct.hexxitgear.core.ArmorSet;
+import sct.hexxitgear.core.CapeHandler;
 
-public class HGPlayerTracker implements IPlayerTracker {
+public class PlayerTracker implements IPlayerTracker {
 
-    public static HGPlayerTracker instance = new HGPlayerTracker();
+    public static PlayerTracker instance = new PlayerTracker();
 
     @Override
     public void onPlayerLogin(EntityPlayer player) {

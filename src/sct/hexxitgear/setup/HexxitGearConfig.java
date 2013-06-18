@@ -46,6 +46,8 @@ public class HexxitGearConfig {
     public static Property hexicalEssence;
     public static Property hexicalDiamond;
 
+    public static Property dimensionalBlacklist;
+
     public static File configFolder;
 
     public static void loadCommonConfig(FMLPreInitializationEvent evt)
@@ -73,6 +75,9 @@ public class HexxitGearConfig {
 
             hexicalEssence = c.getItem(Configuration.CATEGORY_ITEM, "ID.HexicalEssence", 26212);
             hexicalDiamond = c.getItem(Configuration.CATEGORY_ITEM, "ID.HexicalDiamond", 26213);
+
+            dimensionalBlacklist = c.get("World Generation", "Dimensional Blacklist", "");
+            dimensionalBlacklist.comment = "Comma separated list of all blacklisted dimension IDs";
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -149,6 +154,18 @@ public class HexxitGearConfig {
             catch (IOException x)
             {
                 x.printStackTrace();
+            }
+        }
+    }
+
+    public static void registerDimBlacklist() {
+        String blacklist = dimensionalBlacklist.getString().trim();
+
+        for (String dim : blacklist.split(",")) {
+            try {
+                Integer dimID = Integer.parseInt(dim);
+                HexxitGear.addToDimBlacklist(dimID);
+            } catch (Exception e) {
             }
         }
     }

@@ -28,18 +28,18 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import sct.hexxitgear.block.BlockHexbiscus;
-import sct.hexxitgear.core.HGPlayerTracker;
-import sct.hexxitgear.core.HGTickHandler;
+import sct.hexxitgear.core.HexxitGearRegistry;
+import sct.hexxitgear.tick.PlayerTracker;
 import sct.hexxitgear.item.*;
 import sct.hexxitgear.net.ClientPacketHandler;
 import sct.hexxitgear.setup.HexxitGearConfig;
 import sct.hexxitgear.world.HGWorldGen;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Mod(modid = HexxitGear.modId, name = "Hexxit Gear", useMetadata = true, version = HexxitGear.version)
@@ -64,12 +64,12 @@ public class HexxitGear {
     public static Item hexicalEssence;
     public static Item hexicalDiamond;
 
-    public static Item skullHelmet;
+    public static Item tribalHelmet;
     public static Item tribalChest;
     public static Item tribalLeggings;
     public static Item tribalShoes;
 
-    public static Item hoodHelmet;
+    public static Item thiefHelmet;
     public static Item thiefChest;
     public static Item thiefLeggings;
     public static Item thiefBoots;
@@ -79,6 +79,8 @@ public class HexxitGear {
     public static Item scaleLeggings;
     public static Item scaleBoots;
 
+    public static List<Integer> dimensionalBlacklist = new ArrayList<Integer>();
+
     @PreInit
     public void preInit(FMLPreInitializationEvent evt) {
         HexxitGearConfig.setConfigFolderBase(evt.getModConfigurationDirectory());
@@ -87,6 +89,7 @@ public class HexxitGear {
 
         HexxitGearConfig.extractLang(new String[]{"en_US"});
         HexxitGearConfig.loadLang();
+        HexxitGearConfig.registerDimBlacklist();
 
         logger = evt.getModLog();
     }
@@ -95,7 +98,7 @@ public class HexxitGear {
     public void init(FMLInitializationEvent evt) {
         hexbiscus = new BlockHexbiscus(HexxitGearConfig.hexbiscus.getInt());
 
-        skullHelmet = new ItemSkullHelmet(HexxitGearConfig.tribalHelmetId.getInt());
+        tribalHelmet = new ItemSkullHelmet(HexxitGearConfig.tribalHelmetId.getInt());
         tribalChest = new ItemTribalArmor(HexxitGearConfig.tribalChestId.getInt(), proxy.addArmor("tribal"), 1).setUnlocalizedName("hexxitgear.tribal.chest");
         tribalLeggings = new ItemTribalArmor(HexxitGearConfig.tribalLeggingsId.getInt(), proxy.addArmor("tribal"), 2).setUnlocalizedName("hexxitgear.tribal.leggings");
         tribalShoes = new ItemTribalArmor(HexxitGearConfig.tribalShoesId.getInt(), proxy.addArmor("tribal"), 3).setUnlocalizedName("hexxitgear.tribal.boots");
@@ -103,7 +106,7 @@ public class HexxitGear {
         scaleChest = new ItemScaleArmor(HexxitGearConfig.scaleChestId.getInt(), proxy.addArmor("scale"), 1).setUnlocalizedName("hexxitgear.scale.chest");
         scaleLeggings = new ItemScaleArmor(HexxitGearConfig.scaleLeggingsId.getInt(), proxy.addArmor("scale"), 2).setUnlocalizedName("hexxitgear.scale.leggings");
         scaleBoots = new ItemScaleArmor(HexxitGearConfig.scaleBootsId.getInt(), proxy.addArmor("scale"), 3).setUnlocalizedName("hexxitgear.scale.boots");
-        hoodHelmet = new ItemHoodHelmet(HexxitGearConfig.thiefHelmetId.getInt());
+        thiefHelmet = new ItemHoodHelmet(HexxitGearConfig.thiefHelmetId.getInt());
         thiefChest = new ItemThiefArmor(HexxitGearConfig.thiefChestId.getInt(), proxy.addArmor("thief"), 1).setUnlocalizedName("hexxitgear.thief.chest");
         thiefLeggings = new ItemThiefArmor(HexxitGearConfig.thiefLeggingsId.getInt(), proxy.addArmor("thief"), 2).setUnlocalizedName("hexxitgear.thief.leggings");
         thiefBoots = new ItemThiefArmor(HexxitGearConfig.thiefBootsId.getInt(), proxy.addArmor("thief"), 3).setUnlocalizedName("hexxitgear.thief.boots");
@@ -120,6 +123,16 @@ public class HexxitGear {
 
     @PostInit
     public void postInit(FMLPostInitializationEvent evt) {
-        GameRegistry.registerPlayerTracker(HGPlayerTracker.instance);
+        GameRegistry.registerPlayerTracker(PlayerTracker.instance);
+        HexxitGearRegistry.init();
+    }
+
+    public static void addToDimBlacklist(int dimID) {
+        if (!dimensionalBlacklist.contains(dimID))
+            dimensionalBlacklist.add(dimID);
+    }
+
+    public static List<Integer> getDimBlacklist() {
+        return dimensionalBlacklist;
     }
 }
