@@ -32,6 +32,7 @@ import sct.hexxitgear.model.ModelHoodHelmet;
 
 public class ItemHoodHelmet extends ItemArmor {
 
+    @SideOnly(Side.CLIENT)
     public static final ModelHoodHelmet modelHelmet = new ModelHoodHelmet();
 
     public ItemHoodHelmet(int id) {
