@@ -18,6 +18,8 @@
 
 package sct.hexxitgear.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
@@ -49,6 +51,7 @@ public class ItemSkullHelmet extends ItemArmor {
         return "/textures/maps/SkullHelmet.png";
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public ModelBiped getArmorModel(EntityLiving entityLiving, ItemStack itemStack, int armorSlot) {
         return modelHelmet;
