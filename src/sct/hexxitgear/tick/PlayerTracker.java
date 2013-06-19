@@ -30,7 +30,7 @@ public class PlayerTracker implements IPlayerTracker {
     @Override
     public void onPlayerLogin(EntityPlayer player) {
         ArmorSet.getMatchingSet(player);
-        CapeHandler.sendJoinUpdate(player.username);
+        CapeHandler.sendJoinUpdate(player);
     }
 
     @Override

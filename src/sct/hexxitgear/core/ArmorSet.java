@@ -68,7 +68,6 @@ public class ArmorSet {
             if (matched == 4) {
                 if (getPlayerArmorSet(player.username) == null || !getPlayerArmorSet(player.username).equals(armorSet)) {
                     addPlayerArmorSet(player.username, armorSet);
-                    player.sendChatToPlayer("Set complete: " + armorSet.getName());
                 }
                 foundMatch = true;
             }
