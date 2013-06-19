@@ -32,9 +32,6 @@ import sct.hexxitgear.model.ModelScaleHelmet;
 
 public class ItemScaleHelmet extends ItemArmor {
 
-    @SideOnly(Side.CLIENT)
-    public static final ModelScaleHelmet modelHelmet = new ModelScaleHelmet();
-
     public ItemScaleHelmet(int id) {
         super(id, EnumArmorMaterial.DIAMOND, 3, 0);
         setCreativeTab(HGCreativeTab.tab);
@@ -55,6 +52,6 @@ public class ItemScaleHelmet extends ItemArmor {
     @SideOnly(Side.CLIENT)
     @Override
     public ModelBiped getArmorModel(EntityLiving entityLiving, ItemStack itemStack, int armorSlot) {
-        return modelHelmet;
+        return new ModelScaleHelmet();
     }
 }
