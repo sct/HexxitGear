@@ -79,17 +79,18 @@ public class CapeHandler {
     public static void readCapeUpdate(String playerName, String capeUrl) {
         HexxitGear.logger.log(Level.INFO, "Receiving Cape Update Packet");
         EntityPlayer player = HexxitGear.proxy.findPlayer(playerName);
-        if (player != null) {
-            HexxitGear.logger.log(Level.INFO, "Player found. Checking cape URL.");
-            if (!capeUrl.equals("")) {
-                HexxitGear.logger.log(Level.INFO, "Cape URL is not empty, setting cloak");
-                capes.put(playerName, capeUrl);
+        HexxitGear.logger.log(Level.INFO, "Player found. Checking cape URL.");
+        if (!capeUrl.equals("")) {
+            HexxitGear.logger.log(Level.INFO, "Cape URL is not empty, setting cloak");
+            capes.put(playerName, capeUrl);
+            if (player != null) {
                 player.cloakUrl = capes.get(playerName);
                 FMLClientHandler.instance().getClient().renderEngine.obtainImageData(player.cloakUrl, null);
-            } else {
-                capes.remove(playerName);
-                player.cloakUrl = null;
             }
+        } else {
+            capes.remove(playerName);
+            if (player != null)
+                player.cloakUrl = null;
         }
     }
 

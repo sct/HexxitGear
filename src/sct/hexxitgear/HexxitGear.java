@@ -30,8 +30,10 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraftforge.common.MinecraftForge;
 import sct.hexxitgear.block.BlockHexbiscus;
 import sct.hexxitgear.core.HexxitGearRegistry;
+import sct.hexxitgear.event.EventHandler;
 import sct.hexxitgear.tick.PlayerTracker;
 import sct.hexxitgear.item.*;
 import sct.hexxitgear.net.ClientPacketHandler;
@@ -58,6 +60,7 @@ public class HexxitGear {
     public static CommonProxy proxy;
 
     public static Logger logger;
+    public static EventHandler eventHandler;
 
     public static Block hexbiscus;
 
@@ -92,6 +95,8 @@ public class HexxitGear {
         HexxitGearConfig.registerDimBlacklist();
 
         logger = evt.getModLog();
+        eventHandler = new EventHandler();
+        MinecraftForge.EVENT_BUS.register(eventHandler);
     }
 
     @Init
