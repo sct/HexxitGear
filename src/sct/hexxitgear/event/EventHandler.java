@@ -43,7 +43,6 @@ public class EventHandler {
                 if (capeUrl != null && !capeUrl.equals(player.cloakUrl)) {
                     player.cloakUrl = capeUrl;
                     FMLClientHandler.instance().getClient().renderEngine.obtainImageData(player.cloakUrl, null);
-                    HexxitGear.logger.log(Level.INFO, "Player update cape: " + player.username);
                 }
             }
         ticks = 0;

@@ -77,11 +77,8 @@ public class CapeHandler {
     }
 
     public static void readCapeUpdate(String playerName, String capeUrl) {
-        HexxitGear.logger.log(Level.INFO, "Receiving Cape Update Packet");
         EntityPlayer player = HexxitGear.proxy.findPlayer(playerName);
-        HexxitGear.logger.log(Level.INFO, "Player found. Checking cape URL.");
         if (!capeUrl.equals("")) {
-            HexxitGear.logger.log(Level.INFO, "Cape URL is not empty, setting cloak");
             capes.put(playerName, capeUrl);
             if (player != null) {
                 player.cloakUrl = capes.get(playerName);
@@ -95,9 +92,7 @@ public class CapeHandler {
     }
 
     public static void readJoinUpdate(DataInputStream data) {
-
         try {
-            HexxitGear.logger.log(Level.INFO, "Receiving Cape Join Packet");
             capes = new HashMap<String, String>();
 
             int count = data.readByte();
@@ -108,9 +103,7 @@ public class CapeHandler {
                 capeUrl = data.readUTF();
                 capes.put(playerName, capeUrl);
                 EntityPlayer player = HexxitGear.proxy.findPlayer(playerName);
-                HexxitGear.logger.log(Level.INFO, "Trying to find player " + playerName);
                 if (player != null) {
-                    HexxitGear.logger.log(Level.INFO, "Found player setting cape url " + capes.get(playerName));
                     player.cloakUrl = capes.get(playerName);
                     FMLClientHandler.instance().getClient().renderEngine.obtainImageData(player.cloakUrl, null);
                 }
