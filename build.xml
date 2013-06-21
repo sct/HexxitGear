@@ -120,6 +120,7 @@
         <!-- Copy mcmod.info -->
         <copy file="mcmod.info" todir="${classes.dir}"/>
         <copy file="hexxitgear.png" todir="${classes.dir}"/>
+        <copy file="LICENSE" todir="${classes.dir}"/>
 	</target>
 
 	<target name="build-number-there" if="env.BUILD_NUMBER" >
