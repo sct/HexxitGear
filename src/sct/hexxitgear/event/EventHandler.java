@@ -33,7 +33,7 @@ public class EventHandler {
 
     @ForgeSubscribe
     public void playerUpdate(LivingEvent.LivingUpdateEvent event) {
-        if (ticks > 15) {
+        if (ticks > 16) {
             if (event.entityLiving != null && event.entityLiving instanceof EntityPlayer) {
                 if (!event.entityLiving.worldObj.isRemote)
                     return;
