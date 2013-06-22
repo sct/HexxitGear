@@ -51,7 +51,7 @@ public class HGWorldGen implements IWorldGenerator {
             int y = world.getHeightValue(x, z);
 
             if ((world.isAirBlock(x, y, z) || (world.getBlockId(x,y,z) == Block.snow.blockID)) && HexxitGear.hexbiscus.canBlockStay(world, x, y, z)) {
-                if (random.nextInt(100) > 1)
+                if (random.nextInt(50) > 1)
                     continue;
 
                 world.setBlock(x, y, z, HexxitGear.hexbiscus.blockID, 0, 0);
