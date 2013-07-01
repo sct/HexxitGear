@@ -22,14 +22,13 @@ import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import sct.hexxitgear.core.ability.AbilityHandler;
 import sct.hexxitgear.core.CapeHandler;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
-import java.util.HashMap;
-import java.util.Map;
 
-public class ClientPacketHandler implements IPacketHandler {
+public class HGPacketHandler implements IPacketHandler {
     @SuppressWarnings("rawtypes")
     @Override
     public void onPacketData(INetworkManager manager,
@@ -44,6 +43,11 @@ public class ClientPacketHandler implements IPacketHandler {
             CapeHandler.readCapeUpdate((String)packetReadout[0], (String)packetReadout[1]);
         } else if (packetType == Packets.CapeJoin) {
             CapeHandler.readJoinUpdate(data);
+        } else if (packetType == Packets.armorAbility) {
+            Class[] decodeAs = { String.class };
+            Object[] packetReadout = PacketWrapper.readPacketData(data, decodeAs);
+
+            AbilityHandler.readAbilityPacket((String) packetReadout[0]);
         }
 
     }

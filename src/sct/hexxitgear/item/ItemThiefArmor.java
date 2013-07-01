@@ -18,19 +18,30 @@
 
 package sct.hexxitgear.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.util.DamageSource;
+import net.minecraftforge.common.ISpecialArmor;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.gui.HGCreativeTab;
+import sct.hexxitgear.model.ModelHoodHelmet;
+import sct.hexxitgear.util.FormatCodes;
 
-public class ItemThiefArmor extends ItemArmor {
+import java.util.List;
+
+public class ItemThiefArmor extends ItemHexxitArmor {
 
     public ItemThiefArmor(int id, int renderIndex, int slot) {
         super(id, EnumArmorMaterial.DIAMOND, renderIndex, slot);
-        setCreativeTab(HGCreativeTab.tab);
     }
 
     @Override
@@ -41,10 +52,32 @@ public class ItemThiefArmor extends ItemArmor {
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, int slot,
                                   int layer) {
-        if (stack.itemID == HexxitGear.thiefLeggings.itemID) {
-            return "/textures/armor/thief2.png";
+        if (entity instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) entity;
+            if (player.isPotionActive(Potion.invisibility))
+                return "/textures/armor/invisible.png";
         }
 
+        // If the helmet slot, return helmet texture map
+        if (slot == 0)
+            return "/textures/maps/HoodHelmet.png";
+
+        if (stack.itemID == HexxitGear.thiefLeggings.itemID)
+            return "/textures/armor/thief2.png";
+
         return "/textures/armor/thief.png";
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public ModelBiped getArmorModel(EntityLiving entityLiving, ItemStack itemStack, int armorSlot) {
+        if (armorSlot == 0)
+            return new ModelHoodHelmet();
+        return null;
+    }
+
+    @Override
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List infoList, boolean par4) {
+        infoList.add(FormatCodes.Indigo.format + "Thief Set");
     }
 }

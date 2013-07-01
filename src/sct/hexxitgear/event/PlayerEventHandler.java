@@ -27,7 +27,7 @@ import sct.hexxitgear.core.CapeHandler;
 
 import java.util.logging.Level;
 
-public class EventHandler {
+public class PlayerEventHandler {
 
     private int ticks = 0;
 

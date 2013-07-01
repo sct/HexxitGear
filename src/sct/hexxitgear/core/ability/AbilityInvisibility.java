@@ -16,24 +16,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package sct.hexxitgear.core.buff;
+package sct.hexxitgear.core.ability;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
-public class BuffScaleSet implements IBuffHandler {
+public class AbilityInvisibility extends Ability {
 
-    @Override
-    public void applyPlayerBuffs(EntityPlayer player) {
-        player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20, 0));
-        player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 20, 1));
-        player.addPotionEffect(new PotionEffect(Potion.resistance.id, 20, 0));
+    public AbilityInvisibility() {
+        super("Invisibility", 20 * 10, 20 * 5, false);
     }
 
     @Override
-    public void removePlayerBuffs(EntityPlayer player) {
-
+    public void start(EntityPlayer player) {
+        player.addPotionEffect(new PotionEffect(Potion.invisibility.id, 10 * 20, 81));
     }
 
+    @Override
+    public void end(EntityPlayer player) {
+        player.removePotionEffect(Potion.invisibility.id);
+    }
 }

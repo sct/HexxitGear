@@ -33,10 +33,10 @@ import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import sct.hexxitgear.block.BlockHexbiscus;
 import sct.hexxitgear.core.HexxitGearRegistry;
-import sct.hexxitgear.event.EventHandler;
+import sct.hexxitgear.event.PlayerEventHandler;
+import sct.hexxitgear.net.HGPacketHandler;
 import sct.hexxitgear.tick.PlayerTracker;
 import sct.hexxitgear.item.*;
-import sct.hexxitgear.net.ClientPacketHandler;
 import sct.hexxitgear.setup.HexxitGearConfig;
 import sct.hexxitgear.world.HGWorldGen;
 
@@ -46,7 +46,8 @@ import java.util.logging.Logger;
 
 @Mod(modid = HexxitGear.modId, name = "Hexxit Gear", useMetadata = true, version = HexxitGear.version)
 @NetworkMod(serverSideRequired = false, clientSideRequired = true,
-        clientPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = { HexxitGear.modNetworkChannel }, packetHandler = ClientPacketHandler.class))
+        clientPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = { HexxitGear.modNetworkChannel }, packetHandler = HGPacketHandler.class),
+        serverPacketHandlerSpec = @NetworkMod.SidedPacketHandler(channels = { HexxitGear.modNetworkChannel }, packetHandler = HGPacketHandler.class))
 public class HexxitGear {
 
     public static final String modId = "hexxitgear";
@@ -60,7 +61,7 @@ public class HexxitGear {
     public static CommonProxy proxy;
 
     public static Logger logger;
-    public static EventHandler eventHandler;
+    public static PlayerEventHandler playerEventHandler;
 
     public static Block hexbiscus;
 
@@ -95,23 +96,23 @@ public class HexxitGear {
         HexxitGearConfig.registerDimBlacklist();
 
         logger = evt.getModLog();
-        eventHandler = new EventHandler();
-        MinecraftForge.EVENT_BUS.register(eventHandler);
+        playerEventHandler = new PlayerEventHandler();
+        MinecraftForge.EVENT_BUS.register(playerEventHandler);
     }
 
     @Init
     public void init(FMLInitializationEvent evt) {
         hexbiscus = new BlockHexbiscus(HexxitGearConfig.hexbiscus.getInt());
 
-        tribalHelmet = new ItemSkullHelmet(HexxitGearConfig.tribalHelmetId.getInt());
+        tribalHelmet = new ItemTribalArmor(HexxitGearConfig.tribalHelmetId.getInt(), proxy.addArmor("tribal"), 0).setUnlocalizedName("hexxitgear.tribal.helmet");
         tribalChest = new ItemTribalArmor(HexxitGearConfig.tribalChestId.getInt(), proxy.addArmor("tribal"), 1).setUnlocalizedName("hexxitgear.tribal.chest");
         tribalLeggings = new ItemTribalArmor(HexxitGearConfig.tribalLeggingsId.getInt(), proxy.addArmor("tribal"), 2).setUnlocalizedName("hexxitgear.tribal.leggings");
         tribalShoes = new ItemTribalArmor(HexxitGearConfig.tribalShoesId.getInt(), proxy.addArmor("tribal"), 3).setUnlocalizedName("hexxitgear.tribal.boots");
-        scaleHelmet = new ItemScaleHelmet(HexxitGearConfig.scaleHelmetId.getInt());
+        scaleHelmet = new ItemScaleArmor(HexxitGearConfig.scaleHelmetId.getInt(), proxy.addArmor("scale"), 0).setUnlocalizedName("hexxitgear.scale.helmet");
         scaleChest = new ItemScaleArmor(HexxitGearConfig.scaleChestId.getInt(), proxy.addArmor("scale"), 1).setUnlocalizedName("hexxitgear.scale.chest");
         scaleLeggings = new ItemScaleArmor(HexxitGearConfig.scaleLeggingsId.getInt(), proxy.addArmor("scale"), 2).setUnlocalizedName("hexxitgear.scale.leggings");
         scaleBoots = new ItemScaleArmor(HexxitGearConfig.scaleBootsId.getInt(), proxy.addArmor("scale"), 3).setUnlocalizedName("hexxitgear.scale.boots");
-        thiefHelmet = new ItemHoodHelmet(HexxitGearConfig.thiefHelmetId.getInt());
+        thiefHelmet = new ItemThiefArmor(HexxitGearConfig.thiefHelmetId.getInt(), proxy.addArmor("thief"), 0).setUnlocalizedName("hexxitgear.thief.helmet");
         thiefChest = new ItemThiefArmor(HexxitGearConfig.thiefChestId.getInt(), proxy.addArmor("thief"), 1).setUnlocalizedName("hexxitgear.thief.chest");
         thiefLeggings = new ItemThiefArmor(HexxitGearConfig.thiefLeggingsId.getInt(), proxy.addArmor("thief"), 2).setUnlocalizedName("hexxitgear.thief.leggings");
         thiefBoots = new ItemThiefArmor(HexxitGearConfig.thiefBootsId.getInt(), proxy.addArmor("thief"), 3).setUnlocalizedName("hexxitgear.thief.boots");

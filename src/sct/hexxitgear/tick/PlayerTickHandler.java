@@ -21,6 +21,7 @@ package sct.hexxitgear.tick;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 import net.minecraft.entity.player.EntityPlayer;
+import sct.hexxitgear.core.ability.AbilityHandler;
 import sct.hexxitgear.core.ArmorSet;
 
 import java.util.EnumSet;
@@ -45,6 +46,12 @@ public class PlayerTickHandler implements ITickHandler {
                         ArmorSet armorSet = ArmorSet.getPlayerArmorSet(player.username);
                         armorSet.applyBuffs(player);
                     }
+
+                    // We run this outside of the check for an armorset just incase a player takes off armor mid ability
+                    AbilityHandler bh = AbilityHandler.getPlayerAbilityHandler(player.username);
+                    if (bh != null) {
+                        bh.onTick(player);
+                    }
                 }
             }
         }
@@ -61,6 +68,6 @@ public class PlayerTickHandler implements ITickHandler {
 
     @Override
     public String getLabel() {
-        return "MAPlayerTicks";
+        return "HGPlayerTicks";
     }
 }

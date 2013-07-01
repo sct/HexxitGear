@@ -16,24 +16,43 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package sct.hexxitgear.core.buff;
+package sct.hexxitgear.core.ability;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 
-public class BuffScaleSet implements IBuffHandler {
+public abstract class Ability {
 
-    @Override
-    public void applyPlayerBuffs(EntityPlayer player) {
-        player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 20, 0));
-        player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 20, 1));
-        player.addPotionEffect(new PotionEffect(Potion.resistance.id, 20, 0));
+    private String name;
+    private int active;
+    private int cooldown;
+    private boolean instant;
+
+    public Ability(String name, int active, int cooldown, boolean instant) {
+        this.name = name;
+        this.active = active;
+        this.cooldown = cooldown;
+        this.instant = instant;
     }
 
-    @Override
-    public void removePlayerBuffs(EntityPlayer player) {
-
+    public String getName() {
+        return name;
     }
 
+    public int getActive() {
+        return active;
+    }
+
+    public int getCooldown() {
+        return cooldown;
+    }
+
+    public boolean isInstant() {
+        return instant;
+    }
+
+    public abstract void start(EntityPlayer player);
+
+    public void end(EntityPlayer player) {
+
+    }
 }

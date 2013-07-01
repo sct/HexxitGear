@@ -18,19 +18,23 @@
 
 package sct.hexxitgear.item;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import sct.hexxitgear.HexxitGear;
 import sct.hexxitgear.gui.HGCreativeTab;
+import sct.hexxitgear.model.ModelScaleHelmet;
 
-public class ItemScaleArmor extends ItemArmor {
+public class ItemScaleArmor extends ItemHexxitArmor {
 
     public ItemScaleArmor(int id, int renderIndex, int slot) {
         super(id, EnumArmorMaterial.DIAMOND, renderIndex, slot);
-        setCreativeTab(HGCreativeTab.tab);
     }
 
     @Override
@@ -39,12 +43,21 @@ public class ItemScaleArmor extends ItemArmor {
     }
 
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, int slot,
-                                  int layer) {
-        if (stack.itemID == HexxitGear.scaleLeggings.itemID) {
+    public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
+        if (slot == 0)
+            return "/textures/maps/ScaleHelmet.png";
+
+        if (stack.itemID == HexxitGear.scaleLeggings.itemID)
             return "/textures/armor/scale2.png";
-        }
 
         return "/textures/armor/scale.png";
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public ModelBiped getArmorModel(EntityLiving entityLiving, ItemStack itemStack, int armorSlot) {
+        if (armorSlot == 0)
+            return new ModelScaleHelmet();
+        return null;
     }
 }

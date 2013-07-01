@@ -21,6 +21,10 @@ package sct.hexxitgear.core;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import sct.hexxitgear.HexxitGear;
+import sct.hexxitgear.core.ability.Ability;
+import sct.hexxitgear.core.ability.AbilityInvisibility;
+import sct.hexxitgear.core.ability.AbilityKnockback;
+import sct.hexxitgear.core.ability.AbilityShield;
 import sct.hexxitgear.core.buff.BuffScaleSet;
 import sct.hexxitgear.core.buff.BuffThiefSet;
 import sct.hexxitgear.core.buff.BuffTribalSet;
@@ -31,19 +35,21 @@ import java.util.*;
 public class ArmorSet {
 
     public static ArmorSet tribalSet = new ArmorSet("Tribal", "http://dpf.sctgaming.com/capes/brownrags.png",
-            Arrays.asList(HexxitGear.tribalHelmet, HexxitGear.tribalChest, HexxitGear.tribalLeggings, HexxitGear.tribalShoes), new BuffTribalSet());
+            Arrays.asList(HexxitGear.tribalHelmet, HexxitGear.tribalChest, HexxitGear.tribalLeggings, HexxitGear.tribalShoes), new BuffTribalSet(), new AbilityKnockback());
     public static ArmorSet thiefSet = new ArmorSet("Thief", "http://dpf.sctgaming.com/capes/redcape.png",
-            Arrays.asList(HexxitGear.thiefHelmet, HexxitGear.thiefChest, HexxitGear.thiefLeggings, HexxitGear.thiefBoots), new BuffThiefSet());
+            Arrays.asList(HexxitGear.thiefHelmet, HexxitGear.thiefChest, HexxitGear.thiefLeggings, HexxitGear.thiefBoots), new BuffThiefSet(), new AbilityInvisibility());
     public static ArmorSet scaleSet = new ArmorSet("Scale", "http://dpf.sctgaming.com/capes/purplecape.png",
-            Arrays.asList(HexxitGear.scaleHelmet, HexxitGear.scaleChest, HexxitGear.scaleLeggings, HexxitGear.scaleBoots), new BuffScaleSet());
+            Arrays.asList(HexxitGear.scaleHelmet, HexxitGear.scaleChest, HexxitGear.scaleLeggings, HexxitGear.scaleBoots), new BuffScaleSet(), new AbilityShield());
 
     private static List<ArmorSet>armorSets;
     private static Map<String, ArmorSet> playerMap = new HashMap<String, ArmorSet>();
+    private static List<String> activeArmors = new ArrayList<String>();
 
     private List<Item> armors = new ArrayList<Item>();
     private String capeUrl;
     private String name;
     private IBuffHandler buffHandler;
+    private Ability ability;
 
     public static List<ArmorSet> getArmorSets() {
         return armorSets;
@@ -74,7 +80,9 @@ public class ArmorSet {
         }
 
         if (!foundMatch && getPlayerArmorSet(player.username) != null) {
+            ArmorSet as = getPlayerArmorSet(player.username);
             removePlayerArmorSet(player.username);
+            as.removeBuffs(player);
         }
     }
 
@@ -108,19 +116,27 @@ public class ArmorSet {
         playerMap.remove(playerName);
     }
 
-    public ArmorSet(String name, String capeUrl, List<Item>armor, IBuffHandler buffHandler) {
+    public static void readArmorPacket(String playerName) {
+        ArmorSet as = getPlayerArmorSet(playerName);
+        if (as != null && !activeArmors.contains(playerName)) {
+            activeArmors.add(playerName);
+        }
+    }
+
+    public ArmorSet(String name, String capeUrl, List<Item>armor, IBuffHandler buffHandler, Ability ability) {
         this.name = name;
         this.armors = armor;
         this.capeUrl = capeUrl;
         this.buffHandler = buffHandler;
+        this.ability = ability;
 
         if (armorSets == null) armorSets = new ArrayList<ArmorSet>();
 
         armorSets.add(this);
     }
 
-    public ArmorSet(String name, List<Item>armor, IBuffHandler buffHandler) {
-        this(name, null, armor, buffHandler);
+    public ArmorSet(String name, List<Item>armor, IBuffHandler buffHandler, Ability ability) {
+        this(name, null, armor, buffHandler, ability);
     }
 
     public String getName() {
@@ -135,7 +151,15 @@ public class ArmorSet {
         return capeUrl;
     }
 
+    public Ability getAbility() {
+        return ability;
+    }
+
     public void applyBuffs(EntityPlayer player) {
         buffHandler.applyPlayerBuffs(player);
+    }
+
+    public void removeBuffs(EntityPlayer player) {
+        buffHandler.removePlayerBuffs(player);
     }
 }
