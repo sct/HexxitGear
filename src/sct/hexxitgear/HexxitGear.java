@@ -32,7 +32,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import sct.hexxitgear.block.BlockHexbiscus;
-import sct.hexxitgear.core.HexxitGearRegistry;
+import sct.hexxitgear.setup.HexxitGearRegistry;
 import sct.hexxitgear.event.PlayerEventHandler;
 import sct.hexxitgear.net.HGPacketHandler;
 import sct.hexxitgear.tick.PlayerTracker;

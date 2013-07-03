@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package sct.hexxitgear.core;
+package sct.hexxitgear.setup;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -157,5 +157,9 @@ public class HexxitGearRegistry {
                         'O', Block.obsidian,
                         'H', HexxitGear.hexicalDiamond
                 }));
+
+
+        /* Add repair recipes */
+        GameRegistry.addShapelessRecipe(new ItemStack(HexxitGear.tribalHelmet, 1, 0), new ItemStack(HexxitGear.tribalHelmet, 1, Short.MAX_VALUE), HexxitGear.hexicalEssence);
     }
 }
